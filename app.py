@@ -11,7 +11,7 @@ app = Flask(__name__)
 ENABLE_PACKAGE_CHECK = True  # Toggle the package/code check
 ACCESS_CODE = "1234"         # Code to bypass the package check
 PUZZLE_FOLDER = "static/puzzle_images"
-DEFAULT_IMAGE = "static/uploads/default_image.png"
+DEFAULT_IMAGE = "static/uploads/default_image.jpg"
 UPS_TRACKING_URL = "https://www.ups.com/track?HTMLVersion=5.0&loc=en_US&Requester=UPSHome&WBPM_lid=homepage%2Fct1.html_pnl_trk&track.x=Track&trackNums=1ZW086A80435946022/trackdetails"
 
 def check_package_status():
