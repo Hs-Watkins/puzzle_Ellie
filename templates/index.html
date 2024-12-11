@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Puzzle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 40px; /* Space between the left and right columns */
+        }
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .puzzle-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .puzzle-container {
+            display: grid;
+            grid-template-columns: repeat(5, 100px); /* 5 columns for grid */
+            grid-template-rows: repeat(4, 100px); /* 4 rows for grid */
+            gap: 10px;
+        }
+        .dropzone {
+            width: 100px;
+            height: 100px;
+            border: 2px dashed #aaa;
+            background-color: #ffffff;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .pieces-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .pieces-container {
+            display: grid;
+            grid-template-columns: repeat(5, 100px); /* 5 columns for pieces */
+            grid-template-rows: repeat(4, 100px); /* 4 rows for pieces */
+            gap: 10px;
+            justify-content: center;
+        }
+        .puzzle-piece {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: grab;
+        }
+        .download-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .download-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <!-- Left Column: Drop Zones -->
+    <div class="left-column">
+        <h1 class="puzzle-title">Complete the Puzzle</h1>
+        <div class="puzzle-container">
+            {% for i in range(20) %}
+            <div class="dropzone" id="dropzone-{{ i }}" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Right Column: Puzzle Pieces -->
+    <div class="right-column">
+        <h2 class="pieces-title">Puzzle Pieces</h2>
+        <div class="pieces-container">
+            {% for piece in puzzle_pieces %}
+            <img src="{{ piece }}" class="puzzle-piece" draggable="true" ondragstart="drag(event)" id="piece-{{ loop.index0 }}">
+            {% endfor %}
+        </div>
+        <a href="/download" class="download-btn">Download Original Image</a>
+    </div>
+
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            var draggedElement = document.getElementById(data);
+            if (!event.target.querySelector("img")) {
+                event.target.appendChild(draggedElement);
+            }
+        }
+    </script>
+</body>
+</html>

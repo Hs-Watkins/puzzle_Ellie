@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to the Puzzle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .welcome-container {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+        }
+        .welcome-text {
+            flex: 1;
+            padding: 20px;
+        }
+        .welcome-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .welcome-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <div class="welcome-text">
+            <h1>Welcome to Your Personalized Puzzle</h1>
+            <p>Enter the key code below to unlock the puzzle:</p>
+            <form method="POST">
+                <input type="text" name="access_code" placeholder="Enter access code" required>
+                <button type="submit">Submit</button>
+            </form>
+            {% if error %}
+            <p class="error">{{ error }}</p>
+            {% endif %}
+        </div>
+        <div class="welcome-image">
+            <img src="/static/uploads/default_image_2.png" alt="Puzzle Preview">
+        </div>
+    </div>
+</body>
+</html>
